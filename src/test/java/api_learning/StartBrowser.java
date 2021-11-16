@@ -1,5 +1,6 @@
 package api_learning;
 
+import Url.IUrls;
 import driver.DriverFactory;
 
 import org.openqa.selenium.WebDriver;
