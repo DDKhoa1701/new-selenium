@@ -16,12 +16,14 @@ public class Lesson13_1 implements IUrls {
     private static final By inputFieldSelect = By.cssSelector ("input");
     private static final By btnSelect = By.cssSelector ("button");
 
-    public static void main (String[] args) throws InterruptedException {
+    public static void main (String[] args) {
         WebDriver driver = DriverFactory.getChromeDriver ();
         driver.get (baseUrl.concat (dynamicControlSlug));
-        WebDriverWait wait = new WebDriverWait (driver, Duration.ofSeconds (40));
+        WebDriverWait wait = new WebDriverWait (driver, Duration.ofSeconds (30));
 
         try {
+
+
             // 1st FORM | Check example form
             By checkboxExampleFormSelect = By.cssSelector ("#checkbox-example");
             WebElement checkboxExampleFormElement = driver.findElement (checkboxExampleFormSelect);
@@ -39,8 +41,8 @@ public class Lesson13_1 implements IUrls {
             removeButtonElement.click ();
 
             Thread.sleep (4000);
-
             System.out.println (checkboxExampleFormElement.getText ());
+
 
             // 2nd FORM | Input example form
             By inputExampleCheckbox = By.cssSelector ("#input-example");
@@ -50,14 +52,14 @@ public class Lesson13_1 implements IUrls {
 
             if (!inputExampleInputFieldElement.isEnabled ())
                 inputExampleButtonElement.click ();
-            WebElement progressBar = driver.findElement (By.cssSelector ("#loading"));
-            wait.until (ExpectedConditions.invisibilityOf (progressBar));
-//            Thread.sleep (4000);
 
-            if (inputExampleInputFieldElement.isDisplayed ())
+            WebElement messageEnabled = driver.findElement (By.cssSelector ("#message"));
+            wait.until(ExpectedConditions.visibilityOf (messageEnabled));
+
+            if (messageEnabled.isDisplayed ())
                 inputExampleInputFieldElement.sendKeys ("Tks,Mr Tu <3");
             inputExampleButtonElement.click ();
-            Thread.sleep (4000);
+
 
         } catch (Exception e) {
             e.printStackTrace ();
